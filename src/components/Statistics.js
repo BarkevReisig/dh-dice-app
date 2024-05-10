@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const Statistics = () => {
+function Statistics() {
 }
 
 export default Statistics;

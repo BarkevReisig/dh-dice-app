@@ -2,17 +2,19 @@ import { useState } from 'react';
 import DiceRoller from './DiceRoller.js';
 import Statistics from './Statistics.js';
 
-const Dice = () => {
+function Dice() {
   const [rollCount, setRollCount] = useState(0);
   const [resultTotal, setResultTotal] = useState(0);
 
-  function updateStats() {
+  function updateStats(result) {
+    setResultTotal(resultTotal + result);
+    setRollCount(rollCount + 1);
   }
 
   return (
     <>
-      <DiceRoller onRoll={updateStats} />
-      <Statistics />
+      <DiceRoller updateStats={updateStats} />
+      <Statistics rollCount={rollCount} resultTotal={resultTotal} />
     </>
   );
 }

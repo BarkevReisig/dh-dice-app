@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const DiceForm = ({ onClick }) => {
+function DiceForm({ onClick }) {
   return (
     <form onSubmit={(event) => onClick(event)}>
       <label>Enter the target number to roll under</label> <br/>
@@ -10,7 +10,7 @@ const DiceForm = ({ onClick }) => {
   );
 }
 
-const DiceRollResult = ({ diceRoll, success, degrees }) => {
+function DiceRollResult({ diceRoll, success, degrees }) {
   let text;
   if(success) {
     text = `Succeeded with ${degrees} degrees of success`;
@@ -25,17 +25,17 @@ const DiceRollResult = ({ diceRoll, success, degrees }) => {
   );
 }
 
-const DiceRoller = ({ }) => {
+function DiceRoller({ updateStats }) {
   const [diceRoll, setDiceRoll] = useState();
   const [success, setSuccess] = useState();
   const [degrees, setDegrees] = useState();
   const [target, setTarget] = useState();
 
-  const rollDice = () => {
+  function rollDice() {
     return Math.floor(Math.random() * 100) + 1;
   }
   
-  const calculateDiceRoll = (event) => {
+  function calculateDiceRoll(event) {
     event.preventDefault();
     const target = event.target[0].value;
     const resultOfRoll = rollDice();
@@ -43,6 +43,7 @@ const DiceRoller = ({ }) => {
     setDiceRoll(resultOfRoll);
     setSuccess((resultOfRoll <= target && resultOfRoll !== 100) || resultOfRoll === 1);
     setDegrees(Math.abs(Math.floor(resultOfRoll / 10) - Math.floor(target / 10)) + 1);
+    updateStats(resultOfRoll);
   }
 
   return (
