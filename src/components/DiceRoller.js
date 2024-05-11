@@ -38,6 +38,7 @@ function DiceRoller({ updateStats }) {
   function calculateDiceRoll(event) {
     event.preventDefault();
     const target = event.target[0].value;
+    if (!target) return;
     const resultOfRoll = rollDice();
     setTarget(target);
     setDiceRoll(resultOfRoll);
@@ -47,11 +48,13 @@ function DiceRoller({ updateStats }) {
   }
 
   return (
-    <div>
+    <>
       <h1>Dark Heresy 2e Dice Roller</h1>
       <DiceForm onClick={calculateDiceRoll}/>
-      {target && <DiceRollResult diceRoll={diceRoll} success={success} degrees={degrees}/>}
-    </div>
+      <p>
+        {target && <DiceRollResult diceRoll={diceRoll} success={success} degrees={degrees}/>}
+      </p>
+    </>
   );
 }
 
