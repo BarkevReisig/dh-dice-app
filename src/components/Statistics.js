@@ -1,13 +1,18 @@
 import db from '../database/diceStatsDB.js';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, query, where, getDocs } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
+import TrueDate from '../classes/TrueDate.js';
 
 function Statistics({ rollCount, resultTotal }) {
   const [averageResultForDay, setaverageResultForDay] = useState();
+  const date = new TrueDate(new Date());
 
   useEffect(() => {
     async function getaverageResultForDayForToday() {
-      const rollResults = await getDocs(collection(db, 'roll-results'));
+      const q = query(
+        collection(db, 'roll-results'), 
+        where('date', '==', date.fullDate));
+      const rollResults = await getDocs(q);
       let count = 0;
       let resultTotal = 0;
       rollResults.docs.map((result) => {

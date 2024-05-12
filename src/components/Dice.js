@@ -3,16 +3,17 @@ import { Timestamp, collection, addDoc } from 'firebase/firestore';
 import { useState } from 'react';
 import DiceRoller from './DiceRoller.js';
 import Statistics from './Statistics.js';
+import TrueDate from '../classes/TrueDate.js';
 
 function Dice() {
   const [rollCount, setRollCount] = useState(0);
   const [resultTotal, setResultTotal] = useState(0);
 
 	async function updateDBStats(result) {
-		const timestamp = Timestamp.fromDate(new Date());
+		const date = new TrueDate(new Date());
 		const res = await addDoc(collection(db, 'roll-results'), {
 			'roll-value': result,
-			'date': timestamp,
+			'date': date.fullDate,
 		});
 	}		
 
