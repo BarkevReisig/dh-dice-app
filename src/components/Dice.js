@@ -10,10 +10,11 @@ function Dice() {
   const [resultTotal, setResultTotal] = useState(0);
 
 	async function updateDBStats(result) {
-		const date = new TrueDate(new Date());
-		const res = await addDoc(collection(db, 'roll-results'), {
+		const date = new Date();
+		await addDoc(collection(db, 'roll-results'), {
 			'roll-value': result,
-			'date': date.fullDate,
+			'date': new TrueDate(date).fullDate,
+      'timestamp': date,
 		});
 	}		
 

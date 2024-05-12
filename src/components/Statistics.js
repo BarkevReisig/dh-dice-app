@@ -15,14 +15,14 @@ function Statistics({ rollCount, resultTotal }) {
       const rollResults = await getDocs(q);
       let count = 0;
       let resultTotal = 0;
-      rollResults.docs.map((result) => {
+      rollResults.docs.forEach((result) => {
         count++;
         resultTotal += result.get('roll-value');
       });
       setaverageResultForDay((resultTotal / count).toFixed(2));
     }
     getaverageResultForDayForToday();
-  }, [rollCount]);
+  }, [rollCount, date.fullDate]);
 
   return (
     <>
