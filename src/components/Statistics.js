@@ -29,10 +29,10 @@ function Statistics({ rollCount, resultTotal }) {
       {rollCount !== 0 && <p>
         Session roll count: {rollCount}
         <br/>
-        Average roll result: {(resultTotal / rollCount).toFixed(2)}
+        Session average: {(resultTotal / rollCount).toFixed(2)}
       </p>}
       <p>
-        {averageResultForDay}
+        Today&#39;s global average: {averageResultForDay}
       </p>
     </>
   );
