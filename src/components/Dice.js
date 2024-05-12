@@ -1,5 +1,5 @@
 import db from '../database/diceStatsDB.js';
-import { Timestamp, collection, addDoc } from 'firebase/firestore'; 
+import { collection, addDoc } from 'firebase/firestore'; 
 import { useState } from 'react';
 import DiceRoller from './DiceRoller.js';
 import Statistics from './Statistics.js';
