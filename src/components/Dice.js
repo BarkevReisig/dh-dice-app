@@ -1,6 +1,6 @@
 import db from '../database/diceStatsDB.js';
 import { collection, addDoc } from 'firebase/firestore'; 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import DiceRoller from './DiceRoller.js';
 import Statistics from './Statistics.js';
