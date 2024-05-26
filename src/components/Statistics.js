@@ -6,6 +6,8 @@ function UserStats({ rollCount, resultTotal }) {
   return (
     <div>
       {rollCount !== 0 && <p>
+        <b>Your Stats</b>
+        <br/>
         Session roll count: {rollCount}
         <br/>
         Session average: {(resultTotal / rollCount).toFixed(2)}
@@ -14,12 +16,16 @@ function UserStats({ rollCount, resultTotal }) {
   );
 }
 
-function GlobalStats({ averageResultForDay }) {
-  return (
+function GlobalStats({ averageResultForDay, group }) {
+  if(group !== '') {
+    return (
       <p>
-        Today&#39;s global average: {averageResultForDay}
+        <b>Group&#39;s Stats</b>
+        <br/>
+        Roll Average: {averageResultForDay}
       </p>
-  );
+    );
+  }
 }
 
 function Statistics({ rollCount, resultTotal, group }) {
@@ -45,7 +51,7 @@ function Statistics({ rollCount, resultTotal, group }) {
   return (
     <div>
       <UserStats rollCount={rollCount} resultTotal={resultTotal} />
-      <GlobalStats averageResultForDay={averageResultForDay} />
+      <GlobalStats averageResultForDay={averageResultForDay} group={group} />
     </div>
   );
 }

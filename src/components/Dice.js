@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import DiceRoller from './DiceRoller.js';
 import Statistics from './Statistics.js';
+import Group from './Group.js';
 
 function Dice() {
   const [cookies, setCookie] = useCookies(['rollCount', 'resultTotal', 'group']);
@@ -34,10 +35,17 @@ function Dice() {
     updateDBStats(result, success, degrees, target);
   }
 
+  function updateGroup(event) {
+    event.preventDefault();
+    setGroup(event.target[0].value);
+    setCookie('group', group, {maxAge: sessionCookieMaxAge});
+  }
+
   return (
     <>
       <DiceRoller updateStats={updateStats} />
       <Statistics rollCount={rollCount} resultTotal={resultTotal} group={group} />
+      <Group onClick={updateGroup} />
     </>
   );
 }
