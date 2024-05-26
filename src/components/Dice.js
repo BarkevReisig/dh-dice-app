@@ -45,7 +45,7 @@ function Dice() {
     <>
       <DiceRoller updateStats={updateStats} />
       <Statistics rollCount={rollCount} resultTotal={resultTotal} group={group} />
-      <Group onClick={updateGroup} />
+      <Group onClick={updateGroup} group={group} />
     </>
   );
 }
