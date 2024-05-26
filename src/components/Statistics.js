@@ -1,17 +1,35 @@
 import db from '../database/diceStatsDB.js';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
-import TrueDate from '../classes/TrueDate.js';
 
-function Statistics({ rollCount, resultTotal }) {
+function UserStats({ rollCount, resultTotal }) {
+  return (
+    <div>
+      {rollCount !== 0 && <p>
+        Session roll count: {rollCount}
+        <br/>
+        Session average: {(resultTotal / rollCount).toFixed(2)}
+      </p>}
+    </div>
+  );
+}
+
+function GlobalStats({ averageResultForDay }) {
+  return (
+      <p>
+        Today&#39;s global average: {averageResultForDay}
+      </p>
+  );
+}
+
+function Statistics({ rollCount, resultTotal, group }) {
   const [averageResultForDay, setaverageResultForDay] = useState();
-  const date = new TrueDate(new Date());
 
   useEffect(() => {
     async function getaverageResultForDayForToday() {
       const q = query(
         collection(db, 'roll-results'), 
-        where('date', '==', date.fullDate));
+        where('group', '==', group));
       const rollResults = await getDocs(q);
       let count = 0;
       let resultTotal = 0;
@@ -22,19 +40,13 @@ function Statistics({ rollCount, resultTotal }) {
       setaverageResultForDay((resultTotal / count).toFixed(2));
     }
     getaverageResultForDayForToday();
-  }, [rollCount, date.fullDate]);
+  }, [rollCount, group]);
 
   return (
-    <>
-      {rollCount !== 0 && <p>
-        Session roll count: {rollCount}
-        <br/>
-        Session average: {(resultTotal / rollCount).toFixed(2)}
-      </p>}
-      <p>
-        Today&#39;s global average: {averageResultForDay}
-      </p>
-    </>
+    <div>
+      <UserStats rollCount={rollCount} resultTotal={resultTotal} />
+      <GlobalStats averageResultForDay={averageResultForDay} />
+    </div>
   );
 }
 

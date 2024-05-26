@@ -40,11 +40,13 @@ function DiceRoller({ updateStats }) {
     const target = event.target[0].value;
     if (!target) return;
     const resultOfRoll = rollDice();
+    const success = (resultOfRoll <= target && resultOfRoll !== 100) || resultOfRoll === 1;
+    const degrees = Math.abs(Math.floor(resultOfRoll / 10) - Math.floor(target / 10)) + 1;
     setTarget(target);
     setDiceRoll(resultOfRoll);
-    setSuccess((resultOfRoll <= target && resultOfRoll !== 100) || resultOfRoll === 1);
-    setDegrees(Math.abs(Math.floor(resultOfRoll / 10) - Math.floor(target / 10)) + 1);
-    updateStats(resultOfRoll);
+    setSuccess(success);
+    setDegrees(degrees);
+    updateStats(resultOfRoll, success, degrees, target);
   }
 
   return (

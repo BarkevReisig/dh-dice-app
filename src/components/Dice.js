@@ -4,42 +4,40 @@ import { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import DiceRoller from './DiceRoller.js';
 import Statistics from './Statistics.js';
-import TrueDate from '../classes/TrueDate.js';
 
 function Dice() {
-  const [cookies, setCookie] = useCookies(['rollCount', 'resultTotal']);
+  const [cookies, setCookie] = useCookies(['rollCount', 'resultTotal', 'group']);
   const [rollCount, setRollCount] = useState(cookies.rollCount);
   const [resultTotal, setResultTotal] = useState(cookies.resultTotal);
+  const [group, setGroup] = useState(cookies.group === undefined ? '' : cookies.group);
+  const sessionCookieMaxAge = 21600;
 
-	async function updateDBStats(result) {
+	async function updateDBStats(result, success, degrees, target) {
 		const date = new Date();
 		await addDoc(collection(db, 'roll-results'), {
-			'roll-value': result,
-			'date': new TrueDate(date).fullDate,
       'timestamp': date,
+      'group': group,
+			'roll-value': result,
+      'success': success,
+      'degrees': degrees,
+      'target': target,
 		});
 	}		
 
-  function updateStats(result) {
+  function updateStats(result, success, degrees, target) {
     const count = (rollCount === undefined ? 0 : rollCount) + 1;
     const total = (resultTotal === undefined ? 0 : resultTotal) + result;
     setRollCount(count);
     setResultTotal(total);
-    setCookie('rollCount', count, {maxAge: 20/* 43200 */});
-    setCookie('resultTotal', total, {maxAge: 20/* 43200 */});
-    console.log(count + '\n' + total);
-    updateDBStats(result);
+    setCookie('rollCount', count, {maxAge: sessionCookieMaxAge});
+    setCookie('resultTotal', total, {maxAge: sessionCookieMaxAge});
+    updateDBStats(result, success, degrees, target);
   }
-
-  // useEffect(() => {
-  //   setRollCount(cookies.rollCount);
-  //   setResultTotal(cookies.resultTotal);
-  // }, []);
 
   return (
     <>
       <DiceRoller updateStats={updateStats} />
-      <Statistics rollCount={rollCount} resultTotal={resultTotal} />
+      <Statistics rollCount={rollCount} resultTotal={resultTotal} group={group} />
     </>
   );
 }
