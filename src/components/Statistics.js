@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 function UserStats({ rollCount, resultTotal }) {
   return (
     <div>
-      {rollCount !== 0 && <p>
+      {rollCount !== undefined && <p>
         <b>Your Session Stats</b>
         <br/>
         Session roll count: {rollCount}
