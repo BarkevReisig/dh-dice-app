@@ -50,7 +50,7 @@ function Statistics({ rollCount, resultTotal, group }) {
   }, [rollCount, group]);
 
   return (
-    <div>
+    <div id='Statistics'>
       <UserStats rollCount={rollCount} resultTotal={resultTotal} />
       <GlobalStats averageResultForDay={averageResultForDay} group={group} />
     </div>

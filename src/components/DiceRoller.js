@@ -18,10 +18,10 @@ function DiceRollResult({ diceRoll, success, degrees }) {
     text = `Failed with ${degrees} degrees of failure`;
   }
   return (
-    <>
+    <div>
       Rolled a {diceRoll} <br/>
       {text}
-    </>
+    </div>
   );
 }
 
@@ -50,13 +50,13 @@ function DiceRoller({ updateStats }) {
   }
 
   return (
-    <>
+    <div id='DiceRoller'>
       <h1>Dark Heresy 2e Dice Roller</h1>
       <DiceForm onClick={calculateDiceRoll}/>
       <p>
         {target && <DiceRollResult diceRoll={diceRoll} success={success} degrees={degrees}/>}
       </p>
-    </>
+    </div>
   );
 }
 
