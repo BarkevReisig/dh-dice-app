@@ -5,7 +5,6 @@ import { useCookies } from 'react-cookie';
 import DiceRoller from './DiceRoller.js';
 import Statistics from './Statistics.js';
 import Group from './Group.js';
-import './styles/Dice.css';
 
 function Dice() {
   const [cookies, setCookie] = useCookies(['rollCount', 'resultTotal', 'group']);
