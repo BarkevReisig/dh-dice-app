@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 function UserStats({ rollCount, resultTotal }) {
   return (
-    <div>
+    <div id='UserStats'>
       {rollCount !== undefined && <p>
         <b>Your Session Stats</b>
         <br/>
@@ -17,23 +17,23 @@ function UserStats({ rollCount, resultTotal }) {
   );
 }
 
-function GlobalStats({ averageResultForDay, group }) {
+function GlobalStats({ averageGroupResult, group }) {
   if(group !== '') {
     return (
-      <p>
+      <div id='GlobalStats'>
         <b>Group&#39;s Stats</b>
         <br/>
-        Roll average: {averageResultForDay}
-      </p>
+        Roll average: {averageGroupResult}
+      </div>
     );
   }
 }
 
 function Statistics({ rollCount, resultTotal, group }) {
-  const [averageResultForDay, setaverageResultForDay] = useState();
+  const [averageGroupResult, setaverageGroupResult] = useState();
 
   useEffect(() => {
-    async function getaverageResultForDayForToday() {
+    async function getaverageGroupResultForToday() {
       const q = query(
         collection(db, 'roll-results'), 
         where('group', '==', group));
@@ -44,15 +44,15 @@ function Statistics({ rollCount, resultTotal, group }) {
         count++;
         resultTotal += result.get('roll-value');
       });
-      setaverageResultForDay((resultTotal / count).toFixed(2));
+      setaverageGroupResult((resultTotal / count).toFixed(2));
     }
-    getaverageResultForDayForToday();
+    getaverageGroupResultForToday();
   }, [rollCount, group]);
 
   return (
     <div id='Statistics'>
       <UserStats rollCount={rollCount} resultTotal={resultTotal} />
-      <GlobalStats averageResultForDay={averageResultForDay} group={group} />
+      <GlobalStats averageGroupResult={averageGroupResult} group={group} />
     </div>
   );
 }
