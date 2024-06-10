@@ -13,17 +13,17 @@ function Dice() {
   const [group, setGroup] = useState(cookies.group === undefined ? '' : cookies.group);
   const sessionCookieMaxAge = 21600;
 
-	async function updateDBStats(result, success, degrees, target) {
-		const date = new Date();
-		await addDoc(collection(db, 'roll-results'), {
+  async function updateDBStats(result, success, degrees, target) {
+    const date = new Date();
+    await addDoc(collection(db, 'roll-results'), {
       'timestamp': date,
       'group': group,
-			'roll-value': result,
+      'roll-value': result,
       'success': success,
       'degrees': degrees,
       'target': target,
-		});
-	}		
+    });
+  }		
 
   function updateStats(result, success, degrees, target) {
     const count = (rollCount === undefined ? 0 : rollCount) + 1;
@@ -38,7 +38,7 @@ function Dice() {
   function updateGroup(event) {
     event.preventDefault();
     setGroup(event.target[0].value);
-    setCookie('group', group, {maxAge: sessionCookieMaxAge});
+    setCookie('group', event.target[0].value, {maxAge: sessionCookieMaxAge});
   }
 
   return (
