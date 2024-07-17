@@ -24,6 +24,8 @@ function GlobalStats({ averageGroupResult, group }) {
         <b>Group&#39;s Stats</b>
         <br/>
         Roll average: {averageGroupResult}
+        <br/>
+        Something
       </div>
     );
   }

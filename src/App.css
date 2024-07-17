@@ -1,3 +1,13 @@
 .App {
   text-align: center;
 }
+
+#Statistics {
+  display: flex;
+  justify-content: center;
+}
+
+#Statistics > div {
+  width: 200px;
+  text-align: center;
+}
