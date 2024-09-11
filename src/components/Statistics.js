@@ -8,9 +8,9 @@ function UserStats({ rollCount, resultTotal }) {
       {rollCount !== undefined && <p>
         <b>Your Session Stats</b>
         <br/>
-        Session roll count: {rollCount}
+        Roll count: {rollCount}
         <br/>
-        Session roll average: {(resultTotal / rollCount).toFixed(2)}
+        Roll average: {(resultTotal / rollCount).toFixed(2)}
         <br/>
       </p>}
     </div>
@@ -21,11 +21,14 @@ function GlobalStats({ averageGroupResult, group }) {
   if(group !== '') {
     return (
       <div id='GlobalStats'>
-        <b>Group&#39;s Stats</b>
-        <br/>
-        Roll average: {averageGroupResult}
-        <br/>
-        Something
+        <p>
+          <b>Group&#39;s Stats</b>
+          <br/>
+          Roll count:
+          <br/>
+          Roll average: {averageGroupResult}
+          <br/>
+        </p>
       </div>
     );
   }
