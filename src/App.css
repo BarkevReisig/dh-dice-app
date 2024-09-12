@@ -2,12 +2,16 @@
   text-align: center;
 }
 
+h1 {
+  background-color: rgba(176, 29, 21, 0.9);
+}
+
 #Statistics {
   display: flex;
   justify-content: center;
 }
 
 #Statistics > div {
-  width: 170px;
+  width: 170px1;
   text-align: center;
 }
