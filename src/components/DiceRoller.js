@@ -3,7 +3,7 @@ import { useState } from 'react';
 function DiceForm({ onClick }) {
   return (
     <form onSubmit={(event) => onClick(event)}>
-      <label>Enter the target number to roll under</label> <br/>
+      <label>The target number to roll under</label> <br/>
       <input type='number'/> <br/>
       <input type='submit' value='Roll the dice'/>
     </form>
