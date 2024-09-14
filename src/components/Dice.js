@@ -43,12 +43,14 @@ function Dice() {
 
   return (
     <div id='Dice'>
-      <div id='Header'>
+      <header>
         <h1>Dark Heresy 2e Dice Roller</h1>
-      </div>
-      <DiceRoller updateStats={updateStats} />
-      <Statistics rollCount={rollCount} resultTotal={resultTotal} group={group} />
-      <Group onClick={updateGroup} group={group} />
+      </header>
+      <body>
+        <DiceRoller updateStats={updateStats} />
+        <Statistics rollCount={rollCount} resultTotal={resultTotal} group={group} />
+        <Group onClick={updateGroup} group={group} />
+      </body>
     </div>
   );
 }

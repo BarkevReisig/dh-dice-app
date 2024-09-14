@@ -1,9 +1,19 @@
 .App {
   text-align: center;
+  /*background: rgba(89, 14, 10, 0.8);*/
 }
 
-#Header {
-  background: rgba(176, 29, 21, 0.9);
+h1 {
+  margin-top: 0;
+  padding: 10px;
+}
+
+header {
+  background: rgba(117, 15, 10, 0.9);
+}
+
+body {
+  padding-bottom: 40px;
 }
 
 #Statistics {
